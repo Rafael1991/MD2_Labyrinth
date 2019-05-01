@@ -6,6 +6,8 @@ Shader "Custom/TerrainShader" {
 		_Sand ("Sand", 2D) = "white" {}
 		_Grass ("Rock", 2D) = "white" {}
 		_Rock ("Rock", 2D) = "white" {}
+		_Rock2("Rock2", 2D) = "white" {}
+
 		_WaterLevel ("Water Level", Float) = 0
 		_LayerSize ("Layer Size", Float) = 20
 		_BlendRange ("Blend Range", Range(0, 0.5)) = 0.1
@@ -21,6 +23,7 @@ Shader "Custom/TerrainShader" {
             uniform sampler2D _Sand;
             uniform sampler2D _Grass;
             uniform sampler2D _Rock;
+			uniform sampler2D _Rock2;
 
             uniform float _WaterLevel;
             uniform float _LayerSize;
@@ -34,7 +37,7 @@ Shader "Custom/TerrainShader" {
       
 			fragmentInput vert (appdata_base v)
 			{
-				float NumOfTextures = 4;
+				float NumOfTextures = 5;
 				fragmentInput o;
 				o.pos = UnityObjectToClipPos (v.vertex);
                 o.texcoord = v.texcoord;

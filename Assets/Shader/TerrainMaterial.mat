@@ -43,6 +43,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3bc656358df2c804ba1ecfefd23056b6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Rock2:
+        m_Texture: {fileID: 2800000, guid: 57942fd66db35584cabe2d9568362e33, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Sand:
         m_Texture: {fileID: 2800000, guid: 62678e2f726b7f741b9aa33d36005ca3, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -80,7 +84,7 @@ Material:
     - _EmissionEnabled: 0
     - _FlipbookMode: 0
     - _Glossiness: 0.5
-    - _LayerSize: 7.5
+    - _LayerSize: 0.5
     - _LightingEnabled: 1
     - _MaxZ: 100
     - _Metallic: 0
@@ -90,7 +94,7 @@ Material:
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SrcBlend: 1
-    - _WaterLevel: 55
+    - _WaterLevel: 50
     - _ZWrite: 1
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}

@@ -347,7 +347,7 @@ public class DepthMesh : MonoBehaviour
 
         for (int i = 0; i < DepthImage.Length; i++)
         {
-            ImageData[i] = (int)((((int)DepthImage[i]) << 32) | 0x000000FF);
+            ImageData[i] = (int)((((int)DepthImage[i]) << 8) | 0x000000FF);
         }
 
         return ImageData;
