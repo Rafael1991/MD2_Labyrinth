@@ -84,7 +84,7 @@ Material:
     - _EmissionEnabled: 0
     - _FlipbookMode: 0
     - _Glossiness: 0.5
-    - _LayerSize: 0.5
+    - _LayerSize: 1
     - _LightingEnabled: 1
     - _MaxZ: 100
     - _Metallic: 0
@@ -94,7 +94,7 @@ Material:
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SrcBlend: 1
-    - _WaterLevel: 50
+    - _WaterLevel: 3
     - _ZWrite: 1
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}

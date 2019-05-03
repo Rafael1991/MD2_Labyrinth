@@ -5,8 +5,8 @@ Shader "Custom/TerrainShader" {
 		_Water ("Water", 2D) = "white" {}
 		_Sand ("Sand", 2D) = "white" {}
 		_Grass ("Rock", 2D) = "white" {}
-		_Rock ("Rock", 2D) = "white" {}
-		_Rock2("Rock2", 2D) = "white" {}
+	//	_Rock ("Rock", 2D) = "white" {}
+
 
 		_WaterLevel ("Water Level", Float) = 0
 		_LayerSize ("Layer Size", Float) = 20
@@ -22,8 +22,8 @@ Shader "Custom/TerrainShader" {
             uniform sampler2D _Water;
             uniform sampler2D _Sand;
             uniform sampler2D _Grass;
-            uniform sampler2D _Rock;
-			uniform sampler2D _Rock2;
+           // uniform sampler2D _Rock;
+		
 
             uniform float _WaterLevel;
             uniform float _LayerSize;
@@ -37,7 +37,7 @@ Shader "Custom/TerrainShader" {
       
 			fragmentInput vert (appdata_base v)
 			{
-				float NumOfTextures = 5;
+				float NumOfTextures = 3;
 				fragmentInput o;
 				o.pos = UnityObjectToClipPos (v.vertex);
                 o.texcoord = v.texcoord;
@@ -71,7 +71,7 @@ Shader "Custom/TerrainShader" {
 
 			float4 frag (fragmentInput i) : COLOR0 
 			{ 	
-				float NumOfTextures = 4;
+				float NumOfTextures = 3;
 				float TextureFloat = i.blend.w * NumOfTextures;
 
 				if(TextureFloat < 1)
@@ -91,14 +91,15 @@ Shader "Custom/TerrainShader" {
 				else if(TextureFloat < 3)
 				{
 					fixed4 GrassColor = tex2D(_Grass, i.texcoord);
-					fixed4 RockColor = tex2D(_Rock, i.texcoord);
+					return GrassColor;
+					//fixed4 RockColor = tex2D(_Rock, i.texcoord);
 
-					return DoBlending(2, TextureFloat, GrassColor, RockColor);
+					//return DoBlending(2, TextureFloat, GrassColor, RockColor);
 				}
 				
-				fixed4 RockColor = tex2D(_Rock, i.texcoord);
+				//fixed4 RockColor = tex2D(_Rock, i.texcoord);
 
-				return RockColor;
+				//return RockColor;
 
 				fixed4 WaterColor = tex2D(_Water, i.texcoord);
 				fixed4 SandColor = tex2D(_Sand, i.texcoord);

@@ -101,7 +101,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1384366362914734, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
       propertyPath: m_Name
-      value: Entry Room
+      value: Entry Room Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4284646200961232, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -147,35 +147,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1815727306996752, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
-        type: 0}
-    - target: {fileID: 1016950340045986, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
-        type: 0}
-    - target: {fileID: 1028094079595516, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
-        type: 0}
     - target: {fileID: 1327667041507466, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
         type: 0}
+    - target: {fileID: 1327667041507466, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Name
+      value: ' Spawn Point left'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815727306996752, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1815727306996752, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Name
+      value: Spawn Point bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016950340045986, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1016950340045986, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Name
+      value: Spawn Point right
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028094079595516, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1028094079595516, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
+      propertyPath: m_Name
+      value: Spawn Point top
+      objectReference: {fileID: 0}
     - target: {fileID: 114391489058514274, guid: 10c65f0c164d2e04e9c3daf97304609a,
         type: 3}
       propertyPath: openingDirection
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114724521025756804, guid: 10c65f0c164d2e04e9c3daf97304609a,
-        type: 3}
-      propertyPath: openingDirection
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114479378148705994, guid: 10c65f0c164d2e04e9c3daf97304609a,
         type: 3}
@@ -186,6 +197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: openingDirection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114724521025756804, guid: 10c65f0c164d2e04e9c3daf97304609a,
+        type: 3}
+      propertyPath: openingDirection
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
