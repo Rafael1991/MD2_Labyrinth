@@ -63,7 +63,11 @@ Shader "Custom/TerrainShader" {
 			inline float4 DoBlending(float TextureID, float TextureFloat, fixed4 BaseTexture, fixed4 BlendTexture)
 			{
 				float Blend = CalculateBlend(clamp(TextureFloat - TextureID, 0 , 1));
-				return lerp(BaseTexture, BlendTexture, Blend);
+				if (_BlendRange == 0){
+					return BaseTexture;
+				}else{
+					return lerp(BaseTexture, BlendTexture, Blend);
+				}
 			} 
 
 			float4 frag (fragmentInput i) : COLOR0 
