@@ -157,7 +157,7 @@ public class DepthMesh : MonoBehaviour
         Bitmap.UnlockBits(BitmapData);
 
         //Apply Filter
-        Blur.ApplyInPlace(Bitmap);
+        //Blur.ApplyInPlace(Bitmap);
 
         //Copy Bitmap back to Image
         BitmapData = Bitmap.LockBits(ImageBounds, Mode, Format);
