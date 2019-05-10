@@ -8,7 +8,7 @@ Shader "Custom/TerrainShader" {
 		_Rock ("Rock", 2D) = "white" {}
 		_WaterLevel ("Water Level", Float) = 0
 		_LayerSize ("Layer Size", Float) = 20
-		_BlendRange ("Blend Range", Range(0, 0.5)) = 0.1
+		_BlendRange ("Blend Range", Range(0, 0.5)) = 0
 	}
 	SubShader {
 		Pass {
