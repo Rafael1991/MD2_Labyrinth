@@ -2,11 +2,14 @@
 
 Shader "Custom/TerrainShader" {
 	Properties {
-		_Water ("Water", 2D) = "white" {}
-		_Sand ("Sand", 2D) = "white" {}
-		_Grass ("Rock", 2D) = "white" {}
-		_Rock ("Rock", 2D) = "white" {}
-		_WaterLevel ("Water Level", Float) = 0
+		_bottom_layer ("bottom_layer", 2D) = "white" {}
+		_first_layer ("first_layer", 2D) = "white" {}
+		_Grass ("second_layer", 2D) = "white" {}
+
+		//_second_layer ("second_layer", 2D) = "white" {}
+
+
+		_bottom_layerLevel ("bottom_layer Level", Float) = 0
 		_LayerSize ("Layer Size", Float) = 20
 		_BlendRange ("Blend Range", Range(0, 0.5)) = 0
 	}
@@ -17,12 +20,11 @@ Shader "Custom/TerrainShader" {
 			#pragma fragment frag
 			#include "UnityCG.cginc"
      
-            uniform sampler2D _Water;
-            uniform sampler2D _Sand;
-            uniform sampler2D _Grass;
-            uniform sampler2D _Rock;
+            uniform sampler2D _bottom_layer;
+            uniform sampler2D _first_layer;
+          	uniform sampler2D _second_layer;
 
-            uniform float _WaterLevel;
+            uniform float _bottom_layerLevel;
             uniform float _LayerSize;
             uniform float _BlendRange;
 
@@ -34,18 +36,18 @@ Shader "Custom/TerrainShader" {
       
 			fragmentInput vert (appdata_base v)
 			{
-				float NumOfTextures = 4;
+				float NumOfTextures = 3;
 				fragmentInput o;
 				o.pos = UnityObjectToClipPos (v.vertex);
                 o.texcoord = v.texcoord;
 
 				//  |-----------|--------|--------|------------------|
-				//  +   Water   L   Sand    Green    Rock            0
+				//  +   bottom_layer   first_layer   second_layer    0
 				//     |--------|--------|--------|--------|
 				//     0                                   1
 
-				float MinValue = _WaterLevel - (NumOfTextures - 1) * _LayerSize; 
-				float MaxValue = (_WaterLevel + _LayerSize); 
+				float MinValue = _bottom_layerLevel - (NumOfTextures - 1) * _LayerSize; 
+				float MaxValue = (_bottom_layerLevel + _LayerSize); 
 				float Blend = MaxValue - v.vertex.z;
 				Blend = clamp(Blend / (NumOfTextures *_LayerSize), 0, 1);
 
@@ -72,42 +74,32 @@ Shader "Custom/TerrainShader" {
 
 			float4 frag (fragmentInput i) : COLOR0 
 			{ 	
-				float NumOfTextures = 4;
+				float NumOfTextures = 3;
 				float TextureFloat = i.blend.w * NumOfTextures;
 
-				if(TextureFloat < 1)
-				{
-					fixed4 WaterColor = tex2D(_Water, i.texcoord);
-					fixed4 SandColor = tex2D(_Sand, i.texcoord);
+				if(TextureFloat < 1){
 
-					return DoBlending(0, TextureFloat, WaterColor, SandColor);
-				} 
-				else if(TextureFloat < 2)
-				{
-					fixed4 SandColor = tex2D(_Sand, i.texcoord);
-					fixed4 GrassColor = tex2D(_Grass, i.texcoord);
+					fixed4 bottom_color = tex2D(_bottom_layer, i.texcoord);
+					return bottom_color
 
-					return DoBlending(1, TextureFloat, SandColor, GrassColor);
-				} 
-				else if(TextureFloat < 3)
-				{
-					fixed4 GrassColor = tex2D(_Grass, i.texcoord);
-					fixed4 RockColor = tex2D(_Rock, i.texcoord);
+				}else if(TextureFloat < 2){
 
-					return DoBlending(2, TextureFloat, GrassColor, RockColor);
+					fixed4 first_color = tex2D(_first_layer, i.texcoord);
+					return first_color
+
 				}
 				
-				fixed4 RockColor = tex2D(_Rock, i.texcoord);
+				fixed4 second_color = tex2D(_second_layer, i.texcoord);
 
-				return RockColor;
+				return second_color;
 
-				fixed4 WaterColor = tex2D(_Water, i.texcoord);
-				fixed4 SandColor = tex2D(_Sand, i.texcoord);
+				fixed4 bottom_color = tex2D(_bottom_layer, i.texcoord);
+				fixed4 first_color = tex2D(_first_layer, i.texcoord);
 
-				return lerp(WaterColor, SandColor, i.blend.w);
+				return lerp(bottom_color, first_color, i.blend.w);
 
 				//return i.texcoord;	
-                //return tex2D(_Water, i.texcoord);
+                //return tex2D(_bottom_layer, i.texcoord);
 			}
 
       ENDCG
