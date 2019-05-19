@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Grass:
-        m_Texture: {fileID: 2800000, guid: 79755b9396c25c143ab8ed83556ce1e2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52d2544246fe34abf94643968b0b329b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -63,6 +63,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _bottom_layer:
+        m_Texture: {fileID: 2800000, guid: 8642450cdfd0042389a4ed6b0380b0fc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _first_layer:
+        m_Texture: {fileID: 2800000, guid: 7b132834fdf5845acb1a84e140c8902a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlendOp: 0
     - _BlendRange: 0
@@ -92,6 +100,7 @@ Material:
     - _SrcBlend: 1
     - _WaterLevel: 55
     - _ZWrite: 1
+    - _bottom_layerLevel: 0
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

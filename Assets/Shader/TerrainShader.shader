@@ -77,15 +77,18 @@ Shader "Custom/TerrainShader" {
 				float NumOfTextures = 3;
 				float TextureFloat = i.blend.w * NumOfTextures;
 
-				if(TextureFloat < 1){
+				if(TextureFloat < 1)
+				{
 
 					fixed4 bottom_color = tex2D(_bottom_layer, i.texcoord);
-					return bottom_color
+					return bottom_color;
 
-				}else if(TextureFloat < 2){
+				}
+				else if(TextureFloat < 2)
+				{
 
 					fixed4 first_color = tex2D(_first_layer, i.texcoord);
-					return first_color
+					return first_color;
 
 				}
 				
@@ -101,9 +104,8 @@ Shader "Custom/TerrainShader" {
 				//return i.texcoord;	
                 //return tex2D(_bottom_layer, i.texcoord);
 			}
-
-      ENDCG
-    }
-  } 
+      		ENDCG
+    	}
+  	} 
 	FallBack "Diffuse"
 }
