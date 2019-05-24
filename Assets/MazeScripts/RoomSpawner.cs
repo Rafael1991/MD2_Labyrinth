@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class RoomSpawner : MonoBehaviour {
 
@@ -17,7 +20,9 @@ public class RoomSpawner : MonoBehaviour {
 
 	public float waitTime = 4f;
 
+
 	void Start(){
+
 		Destroy(gameObject, waitTime);
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
 		Invoke("Spawn", 0.1f);
@@ -25,6 +30,8 @@ public class RoomSpawner : MonoBehaviour {
 
 
 	void Spawn(){
+
+
 		if(spawned == false){
 			if(openingDirection == 1){
 				// Need to spawn a room with a BOTTOM door.
