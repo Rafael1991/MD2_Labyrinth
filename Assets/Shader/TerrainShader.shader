@@ -12,6 +12,8 @@ Shader "Custom/TerrainShader" {
 		_bottom_layerLevel ("bottom_layer Level", Float) = 0
 		_LayerSize ("Layer Size", Float) = 20
 		_BlendRange ("Blend Range", Range(0, 0.5)) = 0
+
+		_texture_scale ("scale", Float) = 0.5
 	}
 	SubShader {
 		Pass {
@@ -27,6 +29,8 @@ Shader "Custom/TerrainShader" {
             uniform float _bottom_layerLevel;
             uniform float _LayerSize;
             uniform float _BlendRange;
+
+			uniform float _texture_scale
 
 			struct fragmentInput {
 				float4 pos : SV_POSITION;
