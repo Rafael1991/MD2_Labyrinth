@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour {
 
-	public GameObject[] bottomRooms;
-	public GameObject[] topRooms;
-	public GameObject[] leftRooms;
-	public GameObject[] rightRooms;
-
-	public GameObject closedRoom;
+	public GameObject[] AllRooms;
 
 	public List<GameObject> rooms;
 
 	public float waitTime;
 	private bool spawnedBoss;
 	public GameObject boss;
+	private bool spwanedStart;
 
 	void Update(){
         //to be sure that all rooms are spawned before boss is spawned
