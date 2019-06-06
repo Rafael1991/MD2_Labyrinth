@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearScene : MonoBehaviour{
+public class Clear_Scene : MonoBehaviour{
 
 	private Renderer rend;
 
@@ -17,12 +17,12 @@ public class ClearScene : MonoBehaviour{
    	public void clearScene(){
    		foreach (var roomobj in FindObjectsOFType(typeof(GameObject)) as GameObject[]){
    			if (roomobj.name == "LB(clone)"){
-   				rend = roomobj.GetComponent<Renderer>()
+   				rend = roomobj.GetComponent<Renderer>();
    				rend.enabled = false;
    				//Destroy(roomobj);
    			}
    			else if (roomobj.name == "RB(clone)"){
-   				rend = roomobj.GetComponent<Renderer>()
+   				rend = roomobj.GetComponent<Renderer>();
    				rend.enabled = false;
    				//Destroy(roomobj);
    			}
