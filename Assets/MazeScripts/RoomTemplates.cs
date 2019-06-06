@@ -9,21 +9,23 @@ public class RoomTemplates : MonoBehaviour {
 	public List<GameObject> rooms;
 
 	public float waitTime;
-	private bool spawnedBoss;
-	public GameObject boss;
-	private bool spwanedStart;
+	private bool spawnedTreasure;
+	public GameObject treasure;
+    private bool spwanedStart;
 
-	void Update(){
-        //to be sure that all rooms are spawned before boss is spawned
-		if(waitTime <= 0 && spawnedBoss == false){
-			for (int i = 0; i < rooms.Count; i++) {
-				if(i == rooms.Count-1){
-					Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
-					spawnedBoss = true;
-				}
-			}
-		} else {
-			waitTime -= Time.deltaTime;
-		}
-	}
-}
+    void Update() {
+        //to be sure that all rooms are spawned before lava is spawned
+        if (waitTime <= 0 && spawnedTreasure == false) {
+            for (int i = 0; i < rooms.Count; i++) {
+                if (i == rooms.Count - 1) {
+
+                
+                        Instantiate(treasure, rooms[i].transform.position, Quaternion.identity);
+                        spawnedTreasure = true;
+                    }
+                }
+            } else {
+                waitTime -= Time.deltaTime;
+            }
+        }
+    }

@@ -1,115 +1,118 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
 Shader "Custom/TerrainShader" {
-	Properties {
-		_bottom_layer ("bottom_layer", 2D) = "white" {}
-		_first_layer ("first_layer", 2D) = "white" {}
-		_Grass ("second_layer", 2D) = "white" {}
-
-		//_second_layer ("second_layer", 2D) = "white" {}
-
-
-		_bottom_layerLevel ("bottom_layer Level", Float) = 0
-		_LayerSize ("Layer Size", Float) = 20
-		_BlendRange ("Blend Range", Range(0, 0.5)) = 0
-
-		_texture_scale ("scale", Float) = 0.5
+	Properties{
+		_Water("Water", 2D) = "white" {}
+		_Sand("Sand", 2D) = "white" {}
+		_Grass("Rock", 2D) = "white" {}
+		_Rock("Rock", 2D) = "white" {}
+		_WaterLevel("Water Level", Float) = 0
+		_LayerSize("Layer Size", Float) = 20
+		_BlendRange("Blend Range", Range(0, 0.5)) = 0
 	}
-	SubShader {
-		Pass {
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#include "UnityCG.cginc"
-     
-            uniform sampler2D _bottom_layer;
-            uniform sampler2D _first_layer;
-          	uniform sampler2D _second_layer;
+		SubShader{
+			Pass {
+				CGPROGRAM
+				#pragma vertex vert
+				#pragma fragment frag
+				#include "UnityCG.cginc"
 
-            uniform float _bottom_layerLevel;
-            uniform float _LayerSize;
-            uniform float _BlendRange;
+				uniform sampler2D _Water;
+				uniform sampler2D _Sand;
+				uniform sampler2D _Grass;
+				uniform sampler2D _Rock;
 
-			uniform float _texture_scale
+				uniform float _WaterLevel;
+				uniform float _LayerSize;
+				uniform float _BlendRange;
 
-			struct fragmentInput {
-				float4 pos : SV_POSITION;
-                float4 texcoord : TEXCOORD0;
-				float4 blend: COLOR;
-			};
-      
-			fragmentInput vert (appdata_base v)
-			{
-				float NumOfTextures = 3;
-				fragmentInput o;
-				o.pos = UnityObjectToClipPos (v.vertex);
-                o.texcoord = v.texcoord;
+				struct fragmentInput {
+					float4 pos : SV_POSITION;
+					float4 texcoord : TEXCOORD0;
+					float4 blend: COLOR;
+				};
 
-				//  |-----------|--------|--------|------------------|
-				//  +   bottom_layer   first_layer   second_layer    0
-				//     |--------|--------|--------|--------|
-				//     0                                   1
-
-				float MinValue = _bottom_layerLevel - (NumOfTextures - 1) * _LayerSize; 
-				float MaxValue = (_bottom_layerLevel + _LayerSize); 
-				float Blend = MaxValue - v.vertex.z;
-				Blend = clamp(Blend / (NumOfTextures *_LayerSize), 0, 1);
-
-				o.blend.xyz = 0;
-				o.blend.w = Blend;
-				return o;
-			}
-			
-
-			inline float CalculateBlend(float TextureFloat)
-			{
-				return  1 - clamp((1 - TextureFloat) / _BlendRange, 0 , 1);
-			}
-
-			inline float4 DoBlending(float TextureID, float TextureFloat, fixed4 BaseTexture, fixed4 BlendTexture)
-			{
-				float Blend = CalculateBlend(clamp(TextureFloat - TextureID, 0 , 1));
-				if (_BlendRange == 0){
-					return BaseTexture;
-				}else{
-					return lerp(BaseTexture, BlendTexture, Blend);
-				}
-			} 
-
-			float4 frag (fragmentInput i) : COLOR0 
-			{ 	
-				float NumOfTextures = 3;
-				float TextureFloat = i.blend.w * NumOfTextures;
-
-				if(TextureFloat < 1)
+				fragmentInput vert(appdata_base v)
 				{
+					float NumOfTextures = 4;
+					fragmentInput o;
+					o.pos = UnityObjectToClipPos(v.vertex);
+					o.texcoord = v.texcoord;
 
-					fixed4 bottom_color = tex2D(_bottom_layer, i.texcoord);
-					return bottom_color;
+					//  |-----------|--------|--------|------------------|
+					//  +   Water   L   Sand    Green    Rock            0
+					//     |--------|--------|--------|--------|
+					//     0                                   1
 
+					float MinValue = _WaterLevel - (NumOfTextures - 1) * _LayerSize;
+					float MaxValue = (_WaterLevel + _LayerSize);
+					float Blend = MaxValue - v.vertex.z;
+					Blend = clamp(Blend / (NumOfTextures *_LayerSize), 0, 1);
+
+					o.blend.xyz = 0;
+					o.blend.w = Blend;
+					return o;
 				}
-				else if(TextureFloat < 2)
+
+
+				inline float CalculateBlend(float TextureFloat)
 				{
-
-					fixed4 first_color = tex2D(_first_layer, i.texcoord);
-					return first_color;
-
+					return  1 - clamp((1 - TextureFloat) / _BlendRange, 0 , 1);
 				}
-				
-				fixed4 second_color = tex2D(_second_layer, i.texcoord);
 
-				return second_color;
+				inline float4 DoBlending(float TextureID, float TextureFloat, fixed4 BaseTexture, fixed4 BlendTexture)
+				{
+					float Blend = CalculateBlend(clamp(TextureFloat - TextureID, 0 , 1));
+					if (_BlendRange == 0) {
+						return BaseTexture;
+					}
+	else {
+	   return lerp(BaseTexture, BlendTexture, Blend);
+   }
+}
 
-				fixed4 bottom_color = tex2D(_bottom_layer, i.texcoord);
-				fixed4 first_color = tex2D(_first_layer, i.texcoord);
+float4 frag(fragmentInput i) : COLOR0
+{
+	float NumOfTextures = 4;
+	float TextureFloat = i.blend.w * NumOfTextures;
 
-				return lerp(bottom_color, first_color, i.blend.w);
+	if (TextureFloat < 1)
+	{
+		fixed4 WaterColor = tex2D(_Water, i.texcoord);
+		fixed4 SandColor = tex2D(_Sand, i.texcoord);
 
-				//return i.texcoord;	
-                //return tex2D(_bottom_layer, i.texcoord);
-			}
-      		ENDCG
-    	}
-  	} 
-	FallBack "Diffuse"
+		return DoBlending(0, TextureFloat, WaterColor, SandColor);
+	}
+	else if (TextureFloat < 2)
+	{
+		fixed4 SandColor = tex2D(_Sand, i.texcoord);
+		fixed4 GrassColor = tex2D(_Grass, i.texcoord);
+
+		return DoBlending(1, TextureFloat, SandColor, GrassColor);
+	}
+	else if (TextureFloat < 3)
+	{
+		fixed4 GrassColor = tex2D(_Grass, i.texcoord);
+		fixed4 RockColor = tex2D(_Rock, i.texcoord);
+
+		return DoBlending(2, TextureFloat, GrassColor, RockColor);
+	}
+
+	fixed4 RockColor = tex2D(_Rock, i.texcoord);
+
+	return RockColor;
+
+	fixed4 WaterColor = tex2D(_Water, i.texcoord);
+	fixed4 SandColor = tex2D(_Sand, i.texcoord);
+
+	return lerp(WaterColor, SandColor, i.blend.w);
+
+	//return i.texcoord;	
+	//return tex2D(_Water, i.texcoord);
+}
+
+ENDCG
+}
+		}
+			FallBack "Diffuse"
 }
